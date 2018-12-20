@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { setTotalPages } from '../../actions/page'
 
 import MovieItem from './movie_item'
 
@@ -16,11 +18,11 @@ const MoviesContainer = styled.div`
   margin-bottom: 4rem;
 `
 
-export default class MovieGrid extends Component {
+class MovieGrid extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      movies: []
+      movies: [],
     }
   }
 
@@ -28,6 +30,7 @@ export default class MovieGrid extends Component {
     return fetch('http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c')
       .then(res => res.json())
       .then(data => {
+        setTotalPages(data.total_pages)
         if (data.results.length > 12) {
           data.results.length = 12
         }
@@ -63,3 +66,12 @@ export default class MovieGrid extends Component {
     )
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    totalPages: store.page,
+  }
+}
+
+
+export default connect(mapStateToProps)(MovieGrid)
