@@ -1,0 +1,35 @@
+.rc-pagination  {
+	display: flex;
+	border: 1px solid silver;
+	border-radius: 3px;
+}
+
+.rc-pagination-item, 
+.rc-pagination-jump-next,
+.rc-pagination-jump-prev,
+.rc-pagination-prev,
+.rc-pagination-next {
+	list-style-type: none;
+	padding: 1rem 2rem;
+	border-right: 1px solid silver;
+	font-size: 1.5rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.rc-pagination-jump-prev:after, .rc-pagination-jump-next:after {
+	content: "\2022\2022\2022";
+	display: block;
+	letter-spacing: 2px;
+	color: #ccc;
+	font-size: 12px;
+	margin-top: 1px;
+}
+
+.rc-pagination-item-active {
+	color: green;
+}
+
+.rc-pagination-item-active:focus {
+	outline: 0;
+}

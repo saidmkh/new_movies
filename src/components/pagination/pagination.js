@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Pagination from 'rc-pagination';
 import styled from 'styled-components'
 
+import './pagination.css'
+
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -17,6 +19,10 @@ const textItemRender = (current, type, element) => {
   return element;
 };
 
+const onPageChange = (current, pageSize) => {
+  console.log(current)
+}
+
 class PagesPagination extends Component {
   render() {
     return (
@@ -25,6 +31,7 @@ class PagesPagination extends Component {
           showTitle={false}
           total={100}
           itemRender={textItemRender}
+          onChange={onPageChange}
         />
       </PaginationContainer>
     )

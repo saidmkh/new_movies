@@ -7,6 +7,7 @@ const AppHeader = styled.div`
   position: fixed;
   width: 100%;
   background-color: #414141;
+  z-index: 10;
 `
 
 const Container = styled.div`
