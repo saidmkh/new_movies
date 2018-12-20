@@ -18,14 +18,23 @@ const Content = styled.div`
   min-height: calc(100vh - 10rem);
 `
 
+const Container = styled.div`
+  max-width: 1230px;
+  width: 100%;
+  padding: 1.5rem;
+  margin: auto;
+`
+
 export default class Main extends Component {
   render() {
     return (
       <Wrapper>
         <Header />
         <Content>
-          <MovieGrid />
-          <Pagination />
+          <Container>
+            <MovieGrid />
+            <Pagination />
+          </Container>
         </Content>
       </Wrapper>
     )
