@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 
-const Main = styled.div`
+const Content = styled.div`
   margin-top: 10rem;
   background-color: #efefef;
   padding: 3rem 0;
@@ -23,10 +23,10 @@ export default class Main extends Component {
     return (
       <Wrapper>
         <Header />
-        <Main>
+        <Content>
           <MovieGrid />
           <Pagination />
-        </Main>
+        </Content>
       </Wrapper>
     )
   }
