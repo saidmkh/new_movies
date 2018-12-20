@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Pagination from 'rc-pagination';
 import styled from 'styled-components'
 
-import './pagination.css'
+import './pagination.scss'
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const textItemRender = (current, type, element) => {
   return element;
 };
 
-const onPageChange = (current, pageSize) => {
+const onPageChange = (current) => {
   console.log(current)
 }
 
@@ -27,12 +27,16 @@ class PagesPagination extends Component {
   render() {
     return (
       <PaginationContainer>
-        <Pagination
-          showTitle={false}
-          total={100}
-          itemRender={textItemRender}
-          onChange={onPageChange}
-        />
+        <div className="pagination-list">
+          <div className="pagination-first-item" onClick={}>First</div>
+          <Pagination
+            showTitle={false}
+            total={100}
+            itemRender={textItemRender}
+            onChange={onPageChange}
+          />
+          <div className="pagination-last-item">Last</div>
+        </div>
       </PaginationContainer>
     )
   }

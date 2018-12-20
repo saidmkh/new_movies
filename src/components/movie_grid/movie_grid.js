@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import MovieItem from './movie_item'
 
 const GridTitle = styled.div`
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
   color: #888;
   margin-bottom: .75rem;
 `

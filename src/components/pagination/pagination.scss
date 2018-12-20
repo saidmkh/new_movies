@@ -1,0 +1,68 @@
+$silver: rgb(150, 150, 150);
+$green_active: rgb(0, 185, 0);
+$hover_background: rgb(230, 230, 230);
+
+.rc-pagination  {
+  display: flex;
+}
+
+.pagination-list {
+  display: flex;
+  border: 1px solid $silver;
+	border-radius: 3px;
+	padding: 1px;
+}
+
+.rc-pagination-item, 
+.rc-pagination-jump-next,
+.rc-pagination-jump-prev,
+.rc-pagination-prev,
+.rc-pagination-next,
+.pagination-first-item,
+.pagination-last-item {
+  list-style-type: none;
+  user-select: none;
+  padding: 1rem 2rem;
+  border-right: 1px solid $silver;
+  color: $silver;
+  font-size: 1.6rem;
+  font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	
+	&:hover {
+		background-color: $hover_background;
+	}
+}
+
+.pagination-last-item {
+	border-right: 0;
+}
+
+.pagination-first-item,
+.pagination-last-item {
+	color: $green_active;
+	font-weight: bold;
+
+	&:hover {
+		background-color: $hover_background;
+	}
+}
+
+.rc-pagination-jump-prev:after, .rc-pagination-jump-next:after {
+  content: "\2022\2022\2022";
+  display: block;
+  letter-spacing: 2px;
+  color: $silver;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+.rc-pagination-item-active {
+  color: $green_active;
+  font-weight: bold;
+}
+
+.rc-pagination-item-active:focus {
+  outline: 0;
+}
