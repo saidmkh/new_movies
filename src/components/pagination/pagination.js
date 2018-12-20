@@ -23,12 +23,16 @@ const onPageChange = (current) => {
   console.log(current)
 }
 
+const paginationdd = (current) => {
+  onPageChange(1)
+}
+
 class PagesPagination extends Component {
   render() {
     return (
       <PaginationContainer>
         <div className="pagination-list">
-          <div className="pagination-first-item" onClick={}>First</div>
+          <div className="pagination-first-item" onClick={paginationdd}>First</div>
           <Pagination
             showTitle={false}
             total={100}
