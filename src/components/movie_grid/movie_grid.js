@@ -12,6 +12,7 @@ const GridTitle = styled.div`
 const MoviesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 4rem;
 `
 
 export default class MovieGrid extends Component {
