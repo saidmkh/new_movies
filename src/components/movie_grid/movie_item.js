@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { getMovie } from '../../actions/movie'
 
 const MoviesItem = styled.div`
   padding: 1.5rem 1.5rem 1.5rem 0;
@@ -27,9 +29,9 @@ const MovieImg = styled.img`
   }
 `
 
-export default function MovieItem(props) {
+function MovieItem(props) {
   return (
-    <MoviesItem>
+    <MoviesItem onClick={() => props.getMovie(props.obj)}>
       <MovieItemBlock>
         <MovieImg
           src={`http://image.tmdb.org/t/p/w342${props.obj.poster_path}`}
@@ -40,3 +42,22 @@ export default function MovieItem(props) {
     </MoviesItem>
   )
 }
+
+const mapStateToProps = store => {
+  return {
+    movie: store.movie
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  console.log('d')
+  return {
+    getMovie: movie => dispatch(getMovie(movie)),
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieItem)

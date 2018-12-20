@@ -30,7 +30,7 @@ class MovieGrid extends Component {
     return fetch('http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c')
       .then(res => res.json())
       .then(data => {
-        setTotalPages(data.total_pages)
+        this.props.setTotalPages(data.total_pages)
         if (data.results.length > 12) {
           data.results.length = 12
         }
@@ -45,7 +45,6 @@ class MovieGrid extends Component {
 
   render() {
     const { movies } = this.state
-    console.log(movies)
     return (
       <div className="movies__grid">
         <GridTitle>
@@ -68,10 +67,17 @@ class MovieGrid extends Component {
 }
 
 const mapStateToProps = store => {
+  console.log(store)
   return {
-    totalPages: store.page,
+    totalPages: store.page.totalPages
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  setTotalPages: totalPages => dispatch(setTotalPages(totalPages))
+})
 
-export default connect(mapStateToProps)(MovieGrid)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieGrid)
