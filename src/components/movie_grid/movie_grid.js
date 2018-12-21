@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { setTotalPages } from '../../actions/page'
 
 import MovieItem from './movie_item'
+import Pagination from '../pagination/pagintaion'
 
 const GridTitle = styled.div`
   font-size: 2rem;
@@ -23,12 +24,22 @@ class MovieGrid extends Component {
     super(props)
     this.state = {
       movies: [],
+      pageOfItems: []
+    }
+
+    this.onChangePage = this.onChangePage.bind(this);
+    this.loadMovies = this.loadMovies.bind(this);
+  }
+
+  onChangePage() {
+    if (this.props.currentPage) {
+      this.loadMovies(this.props.currentPage)
+
     }
   }
 
-  componentDidMount() {
-
-    return fetch('http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c')
+  loadMovies(page) {
+    return fetch(`http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c&page=${page}`)
       .then(res => res.json())
       .then(data => {
         this.props.setTotalPages(data.total_pages)
@@ -45,6 +56,9 @@ class MovieGrid extends Component {
         console.error(err)
       })
   }
+  componentDidMount() {
+    this.loadMovies(this.props.currentPage)
+  }
 
   render() {
     const { movies } = this.state
@@ -59,20 +73,23 @@ class MovieGrid extends Component {
               <MovieItem
                 key={idx}
                 obj={obj}
-                idx={idx}
               />
             )
           })}
         </MoviesContainer>
+        <Pagination items={movies} onChangePage={this.onChangePage} />
       </div>
     )
   }
 }
 
-const mapStateToProps = store => ({
-  totalPages: store.page.totalPages,
-  currentPage: store.page.currentPage
-})
+const mapStateToProps = store => {
+  console.log(store)
+  return {
+    totalPages: store.page.totalPages,
+    currentPage: store.page.currentPage
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   setTotalPages: totalPages => dispatch(setTotalPages(totalPages))

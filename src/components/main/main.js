@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import Header from '../header/header'
 import MovieGrid from '../movie_grid/movie_grid'
-import Pagination from '../pagination/pagination'
 
 const Wrapper = styled.div`
   position: relative;
@@ -33,7 +32,6 @@ export default class Main extends Component {
         <Content>
           <Container>
             <MovieGrid />
-            <Pagination />
           </Container>
         </Content>
       </Wrapper>

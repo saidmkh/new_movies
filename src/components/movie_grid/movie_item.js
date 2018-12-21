@@ -6,7 +6,7 @@ import { getMovie } from '../../actions/movie'
 const MoviesItem = styled.div`
   padding: 1.5rem 1.5rem 1.5rem 0;
   flex-basis: 16.66%;
-  height: auto;
+  height: 300px;
   border-radius: 6px;
   cursor: pointer;
 `
@@ -22,6 +22,7 @@ const MovieItemBlock = styled.div`
 const MovieImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: all 1s ease;
 
   &:hover {
@@ -34,7 +35,8 @@ function MovieItem(props) {
     <MoviesItem onClick={() => props.getMovie(props.obj)}>
       <MovieItemBlock>
         <MovieImg
-          src={`http://image.tmdb.org/t/p/w342${props.obj.poster_path}`}
+          src={props.obj.poster_path ? `http://image.tmdb.org/t/p/w342${props.obj.poster_path}`
+            : `https://www.fyimusicnews.ca/sites/default/files/default_images/no-image-available.png`}
           title={props.obj.title}
           alt=''
         />
