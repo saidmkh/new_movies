@@ -9,7 +9,6 @@ export default function movieReducer(state = initialState, action) {
     case GET_MOVIE:
       return { ...state, movie: action.payload }
     default:
-      console.log('def')
       return state
   }
 }

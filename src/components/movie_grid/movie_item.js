@@ -43,18 +43,13 @@ function MovieItem(props) {
   )
 }
 
-const mapStateToProps = store => {
-  return {
-    movie: store.movie
-  }
-}
+const mapStateToProps = store => ({
+  movie: store.movie
+})
 
-const mapDispatchToProps = dispatch => {
-  console.log('d')
-  return {
-    getMovie: movie => dispatch(getMovie(movie)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getMovie: movie => dispatch(getMovie(movie)),
+})
 
 
 export default connect(

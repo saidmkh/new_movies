@@ -2,7 +2,7 @@ import { GET_PAGE, SET_TOTAL_PAGES } from '../actions/constants'
 
 const initialState = {
   totalPages: 0,
-  currentPage: 1,
+  currentPage: null,
 }
 
 export default function pageReducer(state = initialState, action) {

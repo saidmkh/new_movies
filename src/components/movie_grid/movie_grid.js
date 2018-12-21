@@ -27,13 +27,16 @@ class MovieGrid extends Component {
   }
 
   componentDidMount() {
+
     return fetch('http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c')
       .then(res => res.json())
       .then(data => {
         this.props.setTotalPages(data.total_pages)
+
         if (data.results.length > 12) {
           data.results.length = 12
         }
+
         this.setState({
           movies: data.results
         })
@@ -66,12 +69,10 @@ class MovieGrid extends Component {
   }
 }
 
-const mapStateToProps = store => {
-  console.log(store)
-  return {
-    totalPages: store.page.totalPages
-  }
-}
+const mapStateToProps = store => ({
+  totalPages: store.page.totalPages,
+  currentPage: store.page.currentPage
+})
 
 const mapDispatchToProps = dispatch => ({
   setTotalPages: totalPages => dispatch(setTotalPages(totalPages))
