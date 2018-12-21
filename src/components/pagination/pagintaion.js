@@ -12,7 +12,6 @@ const PaginationList = styled.div`
   display: flex;
   border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
-	padding: 1px;
 `
 
 const PaginationItem = styled.div`
@@ -23,13 +22,17 @@ const PaginationItem = styled.div`
   color: ${props => props.active ? 'rgb(0, 185, 0)' : 'silver'};
   font-size: 1.6rem;
   font-weight: ${props => props.active === true ? 'bold' : 500};
-  cursor: pointer;
+  cursor: ${props => props.disabled === true ? 'default' : 'pointer'};
   transition: all 0.2s ease;
   ${props => props.disabled === true ? 'pointer-events: none;' : null}
 	
 	&:hover {
-  background-color: rgb(230, 230, 230);
-}
+    background-color: rgb(230, 230, 230);
+  }
+
+  &:last-child {
+    border-right: 0
+  }
 `
 
 class Pagination extends Component {
@@ -55,7 +58,7 @@ class Pagination extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     if (this.props.items !== nextProps.items) {
       if (this.props.items.length && nextProps.items.length
-        && this.props.items[0]['title'] !== nextProps.items[0]['title']
+        && this.props.items[0]['id'] !== nextProps.items[0]['id']
       ) {
         return true
       } else if (this.props.items.length !== nextProps.items.length) {
@@ -79,10 +82,7 @@ class Pagination extends Component {
 
     this.setState({ pages: pages });
     this.props.setPage(page)
-    console.log(this.props.currentPage)
-
     this.props.onChangePage(page);
-
   }
 
   getPages(totalItems, currentPage, pageSize) {
@@ -160,6 +160,7 @@ class Pagination extends Component {
                 obj={obj}
                 onClick={() => this.setPage(obj)}
                 active={pages.currentPage === obj ? true : false}
+                disabled={pages.currentPage === obj ? true : false}
               >
                 {obj}
               </PaginationItem>
@@ -200,6 +201,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   setPage: currentPage => dispatch(setPage(currentPage))
+
 })
 
 export default connect(

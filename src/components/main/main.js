@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Header from '../header/header'
 import MovieGrid from '../movie_grid/movie_grid'
+import Modal from '../modal/modal'
 
 const Wrapper = styled.div`
   position: relative;
@@ -29,6 +30,7 @@ export default class Main extends Component {
     return (
       <Wrapper>
         <Header />
+        <Modal />
         <Content>
           <Container>
             <MovieGrid />

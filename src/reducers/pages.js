@@ -8,7 +8,6 @@ const initialState = {
 export default function pageReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PAGE:
-      console.log('setpg', action.payload)
       return {
         ...state,
         currentPage: action.payload

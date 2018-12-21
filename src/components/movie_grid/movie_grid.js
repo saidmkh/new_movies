@@ -6,6 +6,8 @@ import { setTotalPages } from '../../actions/page'
 import MovieItem from './movie_item'
 import Pagination from '../pagination/pagintaion'
 
+import store from '../../store/store'
+
 const GridTitle = styled.div`
   font-size: 2rem;
   font-weight: 500;
@@ -24,7 +26,6 @@ class MovieGrid extends Component {
     super(props)
     this.state = {
       movies: [],
-      pageOfItems: []
     }
 
     this.onChangePage = this.onChangePage.bind(this);
@@ -32,9 +33,10 @@ class MovieGrid extends Component {
   }
 
   onChangePage() {
+    console.log(store.getState())
+    let page = store.getState().page.currentPage
     if (this.props.currentPage) {
-      this.loadMovies(this.props.currentPage)
-
+      this.loadMovies(page)
     }
   }
 
@@ -83,13 +85,10 @@ class MovieGrid extends Component {
   }
 }
 
-const mapStateToProps = store => {
-  console.log(store)
-  return {
-    totalPages: store.page.totalPages,
-    currentPage: store.page.currentPage
-  }
-}
+const mapStateToProps = store => ({
+  totalPages: store.page.totalPages,
+  currentPage: store.page.currentPage
+})
 
 const mapDispatchToProps = dispatch => ({
   setTotalPages: totalPages => dispatch(setTotalPages(totalPages))
