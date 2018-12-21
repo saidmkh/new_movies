@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components'
 import './App.css';
 
@@ -12,11 +11,9 @@ const AppWrapper = styled.div`
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <AppWrapper>
-          <Main />
-        </AppWrapper>
-      </BrowserRouter>
+      <AppWrapper>
+        <Main />
+      </AppWrapper>
     );
   }
 }

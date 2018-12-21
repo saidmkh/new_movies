@@ -73,6 +73,7 @@ class PaginationComponent extends Component {
     let totalPages = this.props.totalPages
     let currentPage = this.props.currentPage
     let startPage, endPage
+
     pageSize = pageSize || 3
 
     if (this.props.totalPages <= 0) {
@@ -94,7 +95,8 @@ class PaginationComponent extends Component {
     let startIndex = (currentPage - 1) * pageSize
     let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1)
 
-    let pageArr = Array.from({ totalPages }, (x) => x + 1)
+    let pageArr = Array.from({ totalPages }, x => x + 1)
+    console.log('pages', pageArr)
 
     return {
       totalItems: totalItems,
