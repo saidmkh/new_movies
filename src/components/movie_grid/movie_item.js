@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { getMovie } from '../../actions/movie'
+import { openModal } from '../../actions/modal'
 
 const MoviesItem = styled.div`
   padding: 1.5rem 1.5rem 1.5rem 0;
@@ -32,7 +33,12 @@ const MovieImg = styled.img`
 
 function MovieItem(props) {
   return (
-    <MoviesItem onClick={() => props.getMovie(props.obj)}>
+    <MoviesItem
+      onClick={() => {
+        props.getMovie(props.obj)
+        props.openModal()
+        console.log(props)
+      }}>
       <MovieItemBlock>
         <MovieImg
           src={props.obj.poster_path ? `http://image.tmdb.org/t/p/w342${props.obj.poster_path}`
@@ -46,11 +52,13 @@ function MovieItem(props) {
 }
 
 const mapStateToProps = store => ({
-  movie: store.movie
+  movie: store.movie,
+  modal: store.modal
 })
 
 const mapDispatchToProps = dispatch => ({
   getMovie: movie => dispatch(getMovie(movie)),
+  openModal: () => dispatch(openModal())
 })
 
 

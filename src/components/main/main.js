@@ -27,7 +27,6 @@ const Container = styled.div`
 
 class Main extends Component {
   render() {
-    console.log(this.props.movie)
     return (
       <Wrapper>
       <ModalWrapper />

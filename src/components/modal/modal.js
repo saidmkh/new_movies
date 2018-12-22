@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import moment from 'moment'
 
-import { closeMovie } from '../../actions/movie'
+import { closeModal } from '../../actions/modal'
 
 const ModalBackground = styled.div`
   position: absolute;
@@ -135,6 +135,10 @@ class Modal extends Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   render() {
     const { movie } = this.props
     let movie_year = movie.release_date.substring(0, movie.release_date.indexOf('-'))
@@ -142,17 +146,17 @@ class Modal extends Component {
       <ModalBackground>
         <Container>
           <ModalNavBlock>
-            <ModalNavItem onClick={() => closeMovie()}>
+            <ModalNavItem onClick={() => this.props.closeModal()}>
               <ArrowBlock>
                 <ModalArrow arrow='left' />
               </ArrowBlock>
               <ModalNavText>Back to list</ModalNavText>
             </ModalNavItem>
             <ModalNavItem>
+              <ModalNavText>Next Movie</ModalNavText>
               <ArrowBlock>
                 <ModalArrow arrow='right' />
               </ArrowBlock>
-              <ModalNavText>Next Movie</ModalNavText>
             </ModalNavItem>
           </ModalNavBlock>
           <ModalMovieContainer>
@@ -184,4 +188,11 @@ const mapStateToProps = store => ({
   movie: store.movie.movie
 })
 
-export default connect(mapStateToProps)(Modal)
+const mapDispatchToProps = dispatch => ({
+  closeModal: () => dispatch(closeModal())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Modal)

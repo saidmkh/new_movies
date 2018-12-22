@@ -23,7 +23,8 @@ const BackgroundImage = styled.img`
 
 class ModalWrapper extends Component {
   render() {
-    if (Object.keys(this.props.movie).length) {
+    console.log(this.props.modal.isOpen)
+    if (this.props.modal.isOpen) {
       return (
         <React.Fragment>
           <Modal />
@@ -42,6 +43,7 @@ class ModalWrapper extends Component {
 
 
 const mapStateToProps = store => ({
+  modal: store.modal,
   movie: store.movie.movie,
   backgroundImage: store.movie.movie.poster_path
 })
