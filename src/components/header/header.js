@@ -49,6 +49,10 @@ const AccountText = styled.span`
   font-size: 1.7rem;
   font-weight: 300;
   color: white;
+  
+  @media (max-width: 500px) {
+    display: none;
+  }
 `
 
 const AccountArrowDown = styled.div`
@@ -59,6 +63,11 @@ const AccountArrowDown = styled.div`
   display: inline-block;
   padding: 5px;
   transform: rotate(45deg);
+
+  @media (max-width: 500px) {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 `
 
 const HeaderAccount = styled.div`

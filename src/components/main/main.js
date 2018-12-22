@@ -16,6 +16,10 @@ const Content = styled.div`
   background-color: #efefef;
   padding: 3rem 0;
   min-height: calc(100vh - 10rem);
+
+  @media (max-width: 650px) {
+    padding: 1rem 0;
+  }
 `
 
 const Container = styled.div`

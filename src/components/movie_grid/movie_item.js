@@ -5,11 +5,28 @@ import { getMovie } from '../../actions/movie'
 import { openModal } from '../../actions/modal'
 
 const MoviesItem = styled.div`
-  padding: 1.5rem 1.5rem 1.5rem 0;
+  padding: 1.5rem 0.7rem;
   flex-basis: 16.66%;
   height: 300px;
   border-radius: 6px;
   cursor: pointer;
+
+  @media (max-width: 991px) {
+    flex-basis: 20%;
+  }
+
+  @media (max-width: 800px) {
+    flex-basis: 25%;
+  }
+  
+  @media (max-width: 700px) {
+    flex-basis: 33.333%;
+  }
+
+  @media (max-width: 500px) {
+    flex-basis: 50%;
+    height: 270px;
+  }
 `
 
 const MovieItemBlock = styled.div`
@@ -35,9 +52,9 @@ function MovieItem(props) {
   return (
     <MoviesItem
       onClick={() => {
-        props.getMovie({ 
-          movie: props.obj, 
-          movieId: props.idx 
+        props.getMovie({
+          movie: props.obj,
+          movieId: props.idx
         })
         props.openModal()
       }}>

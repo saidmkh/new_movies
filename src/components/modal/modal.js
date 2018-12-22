@@ -11,7 +11,7 @@ const ModalBackground = styled.div`
   top: 10rem;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: -2px;
   z-index: 9;
   background-color: rgba(30, 37, 86, 0.7);
 `
@@ -27,6 +27,10 @@ const ModalNavBlock = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5rem;
+
+  @media (max-width: 600px) {
+    margin-bottom: 0;
+  }
 `
 
 const ModalNavItem = styled.div`
@@ -42,6 +46,10 @@ const ModalNavItem = styled.div`
   &:hover  {
     transform: scale(1.07);
   }
+
+  @media (max-width: 600px) {
+    width: 95px;
+  }
 `
 
 const ArrowBlock = styled.div`
@@ -52,6 +60,10 @@ const ArrowBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    border: 0;
+  }
 `
 
 const ModalArrow = styled.div`
@@ -66,10 +78,16 @@ const ModalArrow = styled.div`
 `
 
 const ModalNavText = styled.div`
-  line-height: 1;
+  padding-bottom: 3px;
   font-size: 2rem;
   color: #e8e8e8;
   transition: all 0.3s ease;
+`
+
+const NavHideText = styled.span`
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 const ModalMovieContainer = styled.div`
@@ -82,11 +100,20 @@ const ModalMovieContainer = styled.div`
 const ModalMovieBlock = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 
 const MovieImageBlock = styled.div`
   margin-right: 4rem;
   height: 300px;  
+
+  @media (max-width: 600px) {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
 `
 
 const MovieImg = styled.img`
@@ -108,6 +135,10 @@ const MovieTitle = styled.div`
 const MovieDetail = styled.div`
   display: flex;
   padding: 1rem 0 2rem;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 const MovieDetailItem = styled.div`
@@ -118,6 +149,10 @@ const MovieDetailItem = styled.div`
   padding-right: 1rem;
 
   &:last-child {
+    border-right: 0;
+  }
+
+  @media (max-width: 800px) {
     border-right: 0;
   }
 `
@@ -168,10 +203,10 @@ class Modal extends Component {
               <ArrowBlock>
                 <ModalArrow arrow='left' />
               </ArrowBlock>
-              <ModalNavText>Back to list</ModalNavText>
+              <ModalNavText>Back<NavHideText> to list</NavHideText></ModalNavText>
             </ModalNavItem>
             <ModalNavItem onClick={this.nextMovie}>
-              <ModalNavText>Next Movie</ModalNavText>
+              <ModalNavText>Next<NavHideText> Movie</NavHideText></ModalNavText>
               <ArrowBlock>
                 <ModalArrow arrow='right' />
               </ArrowBlock>

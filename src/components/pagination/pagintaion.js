@@ -14,6 +14,15 @@ const PaginationList = styled.div`
 	border-radius: 3px;
 `
 
+const PaginationPages = styled.div`
+  display: flex;
+  border-right: 1px solid rgb(150, 150, 150);
+  
+  @media (max-width: 650px) {
+    display: none;
+  }
+`
+
 const PaginationItem = styled.div`
   list-style-type: none;
   user-select: none;
@@ -145,36 +154,40 @@ class Pagination extends Component {
           >
             Prev
           </PaginationItem>
-          {pages.currentPage >= 3 ?
-            <PaginationItem
-              onClick={() => this.setPage(pages.currentPage - 5)}
-            >
-              ...
-            </PaginationItem>
-            : null}
 
-          {pages.pageArr.map((obj, idx) => {
-            return (
+          <PaginationPages>
+            {pages.currentPage >= 3 ?
               <PaginationItem
-                key={idx}
-                obj={obj}
-                onClick={() => this.setPage(obj)}
-                active={pages.currentPage === obj ? true : false}
-                disabled={pages.currentPage === obj ? true : false}
+                onClick={() => this.setPage(pages.currentPage - 5)}
               >
-                {obj}
-              </PaginationItem>
-            )
-          })}
-
-          {pages.currentPage <= pages.totalPages - 2 ?
-            <PaginationItem
-              onClick={() => this.setPage(pages.currentPage + 5)}
-            >
-              ...
+                ...
             </PaginationItem>
-            : null
-          }
+              : null}
+
+            {pages.pageArr.map((obj, idx) => {
+              return (
+                <PaginationItem
+                  key={idx}
+                  obj={obj}
+                  onClick={() => this.setPage(obj)}
+                  active={pages.currentPage === obj ? true : false}
+                  disabled={pages.currentPage === obj ? true : false}
+                >
+                  {obj}
+                </PaginationItem>
+              )
+            })}
+
+            {pages.currentPage <= pages.totalPages - 2 ?
+              <PaginationItem
+                onClick={() => this.setPage(pages.currentPage + 5)}
+              >
+                ...
+              </PaginationItem>
+              : null
+            }
+          </PaginationPages>
+
           <PaginationItem
             disabled={pages.currentPage === pages.totalPages ? true : false}
             onClick={() => this.setPage(pages.currentPage + 1)}
