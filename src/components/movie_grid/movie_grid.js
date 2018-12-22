@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { setTotalPages } from '../../actions/page'
-
+import { loadMovies } from '../../actions/movie'
 import MovieItem from './movie_item'
 import Pagination from '../pagination/pagintaion'
 
@@ -25,7 +25,7 @@ class MovieGrid extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      movies: [],
+      movies: []
     }
 
     this.onChangePage = this.onChangePage.bind(this);
@@ -49,7 +49,8 @@ class MovieGrid extends Component {
         if (data.results.length > 12) {
           data.results.length = 12
         }
-
+        
+        this.props.loadMovies(data.results)
         this.setState({
           movies: data.results
         })
@@ -63,6 +64,7 @@ class MovieGrid extends Component {
   }
 
   render() {
+    console.log(this.props.movies)
     const { movies } = this.state
     return (
       <div className="movies__grid">
@@ -75,6 +77,7 @@ class MovieGrid extends Component {
               <MovieItem
                 key={idx}
                 obj={obj}
+                idx={idx}
               />
             )
           })}
@@ -86,11 +89,13 @@ class MovieGrid extends Component {
 }
 
 const mapStateToProps = store => ({
+  movies: store.movie.movies,
   totalPages: store.page.totalPages,
   currentPage: store.page.currentPage
 })
 
 const mapDispatchToProps = dispatch => ({
+  loadMovies: movies => dispatch(loadMovies(movies)),
   setTotalPages: totalPages => dispatch(setTotalPages(totalPages))
 })
 

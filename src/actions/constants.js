@@ -1,5 +1,6 @@
 export const GET_PAGE = 'GET_PAGE'
 export const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES'
 export const GET_MOVIE = 'GET_MOVIE'
+export const LOAD_MOVIES = 'LOAD_MOVIES'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const OPEN_MODAL = 'OPEN_MODAL'

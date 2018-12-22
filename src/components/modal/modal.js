@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 
 import { closeModal } from '../../actions/modal'
+import { getMovie } from '../../actions/movie'
 
 const ModalBackground = styled.div`
   position: absolute;
@@ -34,11 +35,12 @@ const ModalNavItem = styled.div`
   align-items: center;
   width: 170px;
   padding: 1rem;
+  user-select: none;
   cursor: pointer;
+  transition: all 0.5s;
 
-  &:hover ${ModalNavText} {
-    color: white;
-    font-weight: 500;
+  &:hover  {
+    transform: scale(1.07);
   }
 `
 
@@ -64,6 +66,7 @@ const ModalArrow = styled.div`
 `
 
 const ModalNavText = styled.div`
+  line-height: 1;
   font-size: 2rem;
   color: #e8e8e8;
   transition: all 0.3s ease;
@@ -133,10 +136,22 @@ class Modal extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+
+    this.nextMovie = this.nextMovie.bind(this)
   }
 
   componentDidMount() {
     window.scrollTo(0, 0)
+  }
+
+  nextMovie() {
+    let nextMovieId = this.props.movieId + 1
+
+    if (nextMovieId >= this.props.movies.length) {
+      return false
+    }
+    
+    this.props.getMovie({ movie: this.props.movies[nextMovieId], movieId: nextMovieId })
   }
 
   render() {
@@ -152,7 +167,7 @@ class Modal extends Component {
               </ArrowBlock>
               <ModalNavText>Back to list</ModalNavText>
             </ModalNavItem>
-            <ModalNavItem>
+            <ModalNavItem onClick={this.nextMovie}>
               <ModalNavText>Next Movie</ModalNavText>
               <ArrowBlock>
                 <ModalArrow arrow='right' />
@@ -185,10 +200,13 @@ class Modal extends Component {
 }
 
 const mapStateToProps = store => ({
-  movie: store.movie.movie
+  movie: store.movie.movie,
+  movies: store.movie.movies,
+  movieId: store.movie.movieId
 })
 
 const mapDispatchToProps = dispatch => ({
+  getMovie: movie => dispatch(getMovie(movie)),
   closeModal: () => dispatch(closeModal())
 })
 

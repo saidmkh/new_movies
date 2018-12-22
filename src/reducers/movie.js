@@ -1,7 +1,8 @@
-import { GET_MOVIE } from '../actions/constants'
+import { GET_MOVIE, LOAD_MOVIES } from '../actions/constants'
 
 const initialState = {
   movie: {},
+  movieId: null,
 }
 
 export default function movieReducer(state = initialState, action) {
@@ -9,7 +10,13 @@ export default function movieReducer(state = initialState, action) {
     case GET_MOVIE:
       return {
         ...state,
-        movie: action.payload
+        movie: action.payload.movie,
+        movieId: action.payload.movieId
+      }
+    case LOAD_MOVIES:
+      return {
+        ...state,
+        movies: action.payload
       }
     default:
       return state

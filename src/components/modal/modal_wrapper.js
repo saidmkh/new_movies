@@ -18,19 +18,18 @@ const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(13px);
+  filter: blur(7px);
 `
 
 class ModalWrapper extends Component {
   render() {
-    console.log(this.props.modal.isOpen)
     if (this.props.modal.isOpen) {
       return (
         <React.Fragment>
           <Modal />
           <ModalImageBackground>
-            <BackgroundImage src={this.props.movie.poster_path ? `http://image.tmdb.org/t/p/w342${this.props.movie.poster_path}`
-              : `https://www.fyimusicnews.ca/sites/default/files/default_images/no-image-available.png`}
+            <BackgroundImage src={this.props.movie.backdrop_path ? `http://image.tmdb.org/t/p/w342${this.props.movie.backdrop_path}`
+              : `http://image.tmdb.org/t/p/w342${this.props.movie.poster_path}`}
               alt=''
             />
           </ModalImageBackground>
@@ -42,11 +41,13 @@ class ModalWrapper extends Component {
 }
 
 
-const mapStateToProps = store => ({
+const mapStateToProps = store => {
+ console.log(store)
+  return {
   modal: store.modal,
   movie: store.movie.movie,
   backgroundImage: store.movie.movie.poster_path
-})
+}}
 
 export default connect(mapStateToProps)(ModalWrapper)
 

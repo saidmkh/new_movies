@@ -35,9 +35,8 @@ function MovieItem(props) {
   return (
     <MoviesItem
       onClick={() => {
-        props.getMovie(props.obj)
+        props.getMovie({ movie: props.obj, movieId: props.idx })
         props.openModal()
-        console.log(props)
       }}>
       <MovieItemBlock>
         <MovieImg
@@ -53,7 +52,7 @@ function MovieItem(props) {
 
 const mapStateToProps = store => ({
   movie: store.movie,
-  modal: store.modal
+  movies: store.movie.movies
 })
 
 const mapDispatchToProps = dispatch => ({
