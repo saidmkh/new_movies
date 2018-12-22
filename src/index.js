@@ -13,4 +13,4 @@ ReactDOM.render(
   document.getElementById('root'));
 
 store.subscribe(() => store.getState());
-serviceWorker.unregister();
+serviceWorker.register();
