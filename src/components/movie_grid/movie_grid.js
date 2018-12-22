@@ -33,7 +33,6 @@ class MovieGrid extends Component {
   }
 
   onChangePage() {
-    console.log(store.getState())
     let page = store.getState().page.currentPage
     if (this.props.currentPage) {
       this.loadMovies(page)
@@ -49,7 +48,7 @@ class MovieGrid extends Component {
         if (data.results.length > 12) {
           data.results.length = 12
         }
-        
+
         this.props.loadMovies(data.results)
         this.setState({
           movies: data.results
@@ -64,7 +63,6 @@ class MovieGrid extends Component {
   }
 
   render() {
-    console.log(this.props.movies)
     const { movies } = this.state
     return (
       <div className="movies__grid">

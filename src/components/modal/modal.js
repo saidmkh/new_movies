@@ -150,8 +150,11 @@ class Modal extends Component {
     if (nextMovieId >= this.props.movies.length) {
       return false
     }
-    
-    this.props.getMovie({ movie: this.props.movies[nextMovieId], movieId: nextMovieId })
+
+    this.props.getMovie({
+      movie: this.props.movies[nextMovieId],
+      movieId: nextMovieId
+    })
   }
 
   render() {

@@ -35,7 +35,10 @@ function MovieItem(props) {
   return (
     <MoviesItem
       onClick={() => {
-        props.getMovie({ movie: props.obj, movieId: props.idx })
+        props.getMovie({ 
+          movie: props.obj, 
+          movieId: props.idx 
+        })
         props.openModal()
       }}>
       <MovieItemBlock>

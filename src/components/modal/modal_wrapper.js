@@ -41,13 +41,11 @@ class ModalWrapper extends Component {
 }
 
 
-const mapStateToProps = store => {
- console.log(store)
-  return {
+const mapStateToProps = store => ({
   modal: store.modal,
   movie: store.movie.movie,
   backgroundImage: store.movie.movie.poster_path
-}}
+})
 
 export default connect(mapStateToProps)(ModalWrapper)
 
