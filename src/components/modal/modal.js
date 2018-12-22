@@ -1,30 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import moment from 'moment'
+
+import { closeMovie } from '../../actions/movie'
 
 const ModalBackground = styled.div`
-  position: relative;
+  position: absolute;
   top: 10rem;
   right: 0;
   left: 0;
   bottom: 0;
-`
-
-const ModalImageBackground = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  filter: blur(10px);
-`
-
-const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  z-index: 9;
+  background-color: rgba(30, 37, 86, 0.7);
 `
 
 const Container = styled.div`
@@ -44,34 +32,41 @@ const ModalNavItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 150px;
+  width: 170px;
+  padding: 1rem;
+  cursor: pointer;
+
+  &:hover ${ModalNavText} {
+    color: white;
+    font-weight: 500;
+  }
 `
 
 const ArrowBlock = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 30px;
-  border: 1px solid #999;
+  border: 1px solid #e8e8e8;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 const ModalArrow = styled.div`
-  margin: 2px 0 0 10px;
-  height: 14px;
-  border: solid white;
+  height: 10px;
+  border: solid #e8e8e8;
   border-width: 0 2px 2px 0;
   display: inline-block;
-  padding: 5px;
-  transform: ${props => props.arrow === 'right' ? 'rotate(90deg)'
-    : props.arrow === 'left' ? 'rotate(180deg)'
+  padding: 4px;
+  transform: ${props => props.arrow === 'right' ? 'rotate(320deg)'
+    : props.arrow === 'left' ? 'rotate(135deg)'
       : ''};
 `
 
 const ModalNavText = styled.div`
   font-size: 2rem;
-  color: #999;
+  color: #e8e8e8;
+  transition: all 0.3s ease;
 `
 
 const ModalMovieContainer = styled.div`
@@ -88,13 +83,12 @@ const ModalMovieBlock = styled.div`
 
 const MovieImageBlock = styled.div`
   margin-right: 4rem;
-  width: 200px;
   height: 300px;  
 `
 
 const MovieImg = styled.img`
   object-fit: cover;
-  width: 100%;
+  width: 200px;
   height: 100%;
 `
 
@@ -119,6 +113,10 @@ const MovieDetailItem = styled.div`
   border-right: 1px solid white;
   margin-right: 7px;
   padding-right: 1rem;
+
+  &:last-child {
+    border-right: 0;
+  }
 `
 
 const MovieDescription = styled.div`
@@ -132,57 +130,58 @@ const MovieDescription = styled.div`
 
 
 class Modal extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
   render() {
+    const { movie } = this.props
+    let movie_year = movie.release_date.substring(0, movie.release_date.indexOf('-'))
     return (
       <ModalBackground>
-        <ModalImageBackground>
-          <BackgroundImage src={this.props.movie.movie.poster_path ? `http://image.tmdb.org/t/p/w342${props.obj.poster_path}`
-            : `https://www.fyimusicnews.ca/sites/default/files/default_images/no-image-available.png`}
-            alt=''
-          />
-          <Container>
-            <ModalNavBlock>
-              <ModalNavItem>
-                <ArrowBlock>
-                  <ModalArrow arrow='left' />
-                </ArrowBlock>
-                <ModalNavText>Back to list</ModalNavText>
-              </ModalNavItem>
-              <ModalNavItem>
-                <ArrowBlock>
-                  <ModalArrow arrow='left' />
-                </ArrowBlock>
-                <ModalNavText>Next Movie</ModalNavText>
-              </ModalNavItem>
-            </ModalNavBlock>
-            <ModalMovieContainer>
-              <ModalMovieBlock>
-                <MovieImageBlock>
-                  <MovieImg src={this.props.movie.movie.poster_path ? `http://image.tmdb.org/t/p/w342${props.obj.poster_path}`
-                    : `https://www.fyimusicnews.ca/sites/default/files/default_images/no-image-available.png`}
-                    alt=''
-                  />
-                </MovieImageBlock>
-                <MovieInfo>
-                  <MovieTitle>{this.props.movie.movie.title}</MovieTitle>
-                </MovieInfo>
+        <Container>
+          <ModalNavBlock>
+            <ModalNavItem onClick={() => closeMovie()}>
+              <ArrowBlock>
+                <ModalArrow arrow='left' />
+              </ArrowBlock>
+              <ModalNavText>Back to list</ModalNavText>
+            </ModalNavItem>
+            <ModalNavItem>
+              <ArrowBlock>
+                <ModalArrow arrow='right' />
+              </ArrowBlock>
+              <ModalNavText>Next Movie</ModalNavText>
+            </ModalNavItem>
+          </ModalNavBlock>
+          <ModalMovieContainer>
+            <ModalMovieBlock>
+              <MovieImageBlock>
+                <MovieImg src={movie.poster_path ? `http://image.tmdb.org/t/p/w342${movie.poster_path}`
+                  : `https://www.fyimusicnews.ca/sites/default/files/default_images/no-image-available.png`}
+                  alt=''
+                />
+              </MovieImageBlock>
+              <MovieInfo>
+                <MovieTitle>{movie.title} ({movie_year})</MovieTitle>
                 <MovieDetail>
-                  <MovieDetailItem>{this.props.movie.movie.vote_average}</MovieDetailItem>
-                  <MovieDetailItem>{this.props.movie.movie.adult}</MovieDetailItem>
-                  <MovieDetailItem>{this.props.movie.movie.release_date}</MovieDetailItem>
+                  <MovieDetailItem>Score:  {movie.vote_average}</MovieDetailItem>
+                  <MovieDetailItem>Rating:  {movie.adult === false ? 'PG-13' : 'R'}</MovieDetailItem>
+                  <MovieDetailItem>Release date: {moment(movie.release_date).format('ll')}</MovieDetailItem>
                 </MovieDetail>
-                <MovieDescription>{this.props.movie.movie.overview}</MovieDescription>
-              </ModalMovieBlock>
-            </ModalMovieContainer>
-          </Container>
-        </ModalImageBackground>
+                <MovieDescription>{movie.overview}</MovieDescription>
+              </MovieInfo>
+            </ModalMovieBlock>
+          </ModalMovieContainer>
+        </Container>
       </ModalBackground>
     )
   }
 }
 
 const mapStateToProps = store => ({
-  movie: store.movie
+  movie: store.movie.movie
 })
 
 export default connect(mapStateToProps)(Modal)

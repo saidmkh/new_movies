@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Header from '../header/header'
 import MovieGrid from '../movie_grid/movie_grid'
-import Modal from '../modal/modal'
+import ModalWrapper from '../modal/modal_wrapper'
 
 const Wrapper = styled.div`
   position: relative;
@@ -25,12 +25,13 @@ const Container = styled.div`
   margin: auto;
 `
 
-export default class Main extends Component {
+class Main extends Component {
   render() {
+    console.log(this.props.movie)
     return (
       <Wrapper>
+      <ModalWrapper />
         <Header />
-        <Modal />
         <Content>
           <Container>
             <MovieGrid />
@@ -40,3 +41,5 @@ export default class Main extends Component {
     )
   }
 }
+
+export default Main
